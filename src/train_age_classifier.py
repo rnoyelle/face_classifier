@@ -23,6 +23,8 @@ dataset_name = 'imdb_age'
 input_shape = (256, 256, 3)
 if input_shape[2] == 1:
     grayscale = True
+else :
+    grayscale = False
 base_path = '/donnees/rnoyelle/deep_annotation/'
 images_path = base_path + 'datasets/imdb_crop/'
 log_file_path = base_path + 'models/dev_models/age_models/gender_training.log'
