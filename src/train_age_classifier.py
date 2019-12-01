@@ -25,7 +25,7 @@ if input_shape[2] == 1:
     grayscale = True
 images_path = '../datasets/imdb_crop/'
 log_file_path = '../dev_models/age_models/gender_training.log'
-trained_models_path = '../dev_models/dev_models/age_vgg_classifier'
+trained_models_path = '../dev_models/age_models/age_classifier_VGG16'
 
 
 # data loader
