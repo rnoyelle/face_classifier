@@ -25,10 +25,12 @@ if input_shape[2] == 1:
     grayscale = True
 else :
     grayscale = False
-base_path = '/donnees/rnoyelle/deep_annotation/'
-images_path = base_path + 'datasets/imdb_crop/'
+base_path = '/donnees/rnoyelle/deep_annotation/' # 'C:/Users/Rudy/Documents/Projet_Digitale/deep_annotation/'
+images_path =  base_path + 'datasets/imdb_crop/' # 'C:/Users/Rudy/Documents/Projet_Digitale/dataset/IMDB/imdb_crop/' #base_path + 'datasets/imdb_crop/'
 log_file_path = base_path + 'models/dev_models/age_models/gender_training.log'
 trained_models_path = base_path + 'models/dev_models/age_models/age_classifier_VGG16'
+
+print('bouh')
 
 
 # data loader
