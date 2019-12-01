@@ -23,16 +23,13 @@ dataset_name = 'imdb_age'
 input_shape = (256, 256, 3)
 if input_shape[2] == 1:
     grayscale = True
-else :
-    grayscale = False
-base_path = '/donnees/rnoyelle/deep_annotation/'
-images_path = base_path + 'datasets/imdb_crop/'
-log_file_path = base_path + 'models/dev_models/age_models/gender_training.log'
-trained_models_path = base_path + 'models/dev_models/age_models/age_classifier_VGG16'
+images_path = '../datasets/imdb_crop/'
+log_file_path = '../dev_models/age_models/gender_training.log'
+trained_models_path = '../dev_models/age_models/age_classifier_VGG16'
 
 
 # data loader
-data_loader = DataManager(dataset_name,  dataset_path=images_path +'imdb.mat')
+data_loader = DataManager(dataset_name)
 ground_truth_data = data_loader.get_data()
 train_keys, val_keys = split_imdb_data(ground_truth_data, validation_split)
 print('Number of training samples:', len(train_keys))
@@ -44,6 +41,7 @@ image_generator = ImageGenerator(ground_truth_data, batch_size,
                                  vertical_flip_probability=0,
                                  grayscale=grayscale,
                                  norm_input='vgg',
+                                 num_classes=num_classes,
                                  do_random_crop=do_random_crop)
 
 
