@@ -40,6 +40,7 @@ print('Number of validation samples:', len(val_keys))
 image_generator = ImageGenerator(ground_truth_data, batch_size,
                                  input_shape[:2],
                                  train_keys, val_keys, None,
+                                 path_prefix=images_path,
                                  vertical_flip_probability=0,
                                  grayscale=grayscale,
                                  norm_input='vgg',
