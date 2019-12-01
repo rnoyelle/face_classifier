@@ -32,7 +32,7 @@ trained_models_path = base_path + 'models/dev_models/age_models/age_classifier_V
 
 
 # data loader
-data_loader = DataManager(dataset_name, dataset_path=images_path)
+data_loader = DataManager(dataset_name, dataset_path=images_path + 'imdb.mat')
 ground_truth_data = data_loader.get_data()
 train_keys, val_keys = split_imdb_data(ground_truth_data, validation_split)
 print('Number of training samples:', len(train_keys))
