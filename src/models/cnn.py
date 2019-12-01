@@ -7,8 +7,11 @@ from keras.models import Model
 from keras.layers import Input
 from keras.layers import MaxPooling2D
 from keras.layers import SeparableConv2D
+from keras.layers import Dense
 from keras import layers
 from keras.regularizers import l2
+
+from keras.applications.vgg16 import VGG16
 
 
 def simple_CNN(input_shape, num_classes):
@@ -342,6 +345,34 @@ def big_XCEPTION(input_shape, num_classes):
     output = Activation('softmax', name='predictions')(x)
 
     model = Model(img_input, output)
+    return model
+
+
+def classifier_VGG16(input_shape, num_classes):
+
+
+
+
+    # # load the VGG conv layer
+    model_vgg16_conv = VGG16(include_top=False, weights='imagenet')
+
+    x = Input(shape=input_shape,name = 'image_input')
+    y = model_vgg16_conv(x)
+    conv_layer = Model(input=x, output=y)
+    # conv_layer.trainable = False
+
+
+    # create our model
+    model = Sequential()
+    model.add(conv_layer)
+
+    model.add(Flatten())
+    model.add(Dense(4096, activation="relu"))
+    model.add(Dropout(0.5))
+    model.add(Dense(4096, activation="relu"))
+    model.add(Dropout(0.5))
+    model.add(Dense(num_classes, activation='softmax'))
+
     return model
 
 
