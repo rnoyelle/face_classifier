@@ -19,7 +19,7 @@ validation_split = .2
 do_random_crop = False
 patience = 100
 num_classes = 101
-dataset_name = 'imdb'
+dataset_name = 'imdb_age'
 input_shape = (256, 256, 3)
 if input_shape[2] == 1:
     grayscale = True
