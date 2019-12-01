@@ -1,4 +1,5 @@
 from scipy.io import loadmat
+from datetime import date
 import pandas as pd
 import numpy as np
 from random import shuffle
@@ -17,23 +18,29 @@ class DataManager(object):
         self.image_size = image_size
         if self.dataset_path is not None:
             self.dataset_path = dataset_path
-        elif self.dataset_name == 'imdb':
+        elif self.dataset_name == 'imdb' or self.dataset_name == 'imdb_gender':
             self.dataset_path = '../datasets/imdb_crop/imdb.mat'
         elif self.dataset_name == 'fer2013':
             self.dataset_path = '../datasets/fer2013/fer2013.csv'
         elif self.dataset_name == 'KDEF':
             self.dataset_path = '../datasets/KDEF/'
+        elif self.dataset_name == 'imdb_age':
+            self.dataset_path = '../datasets/imdb_crop/imdb.mat'
         else:
+            supported_dataset = ['imdb', 'imdb_gender', 'imdb_age', 'fer2013']
             raise Exception(
-                    'Incorrect dataset name, please input imdb or fer2013')
+                    'Incorrect dataset name, please input {}'.format('or'.join(supported_dataset)))
 
     def get_data(self):
-        if self.dataset_name == 'imdb':
+        if self.dataset_name == 'imdb'or self.dataset_name == 'imdb_gender':
             ground_truth_data = self._load_imdb()
         elif self.dataset_name == 'fer2013':
             ground_truth_data = self._load_fer2013()
         elif self.dataset_name == 'KDEF':
             ground_truth_data = self._load_KDEF()
+        elif self.dataset_name == 'imdb_age':
+            ground_truth_data = self._load_imdb_age()
+
         return ground_truth_data
 
     def _load_imdb(self):
@@ -55,6 +62,39 @@ class DataManager(object):
             image_name = image_names_array[image_name_arg][0]
             image_names.append(image_name)
         return dict(zip(image_names, gender_classes))
+
+    def _load_imdb_age(self):
+        face_score_treshold = 3
+        dataset = loadmat(self.dataset_path)
+        image_names_array = dataset['imdb']['full_path'][0, 0][0]
+        dob_array = dataset['imdb']['dob'][0, 0][0]  # dob = date of birth
+        photo_date_array = dataset['imdb']['photo_taken'][0, 0][0]
+
+        face_score = dataset['imdb']['face_score'][0, 0][0]
+        second_face_score = dataset['imdb']['second_face_score'][0, 0][0]
+        face_score_mask = face_score > face_score_treshold
+        second_face_score_mask = np.isnan(second_face_score)
+        unknown_dob_mask = np.logical_not(np.logical_or(np.isnan(dob_array), np.nan(photo_date_array)))
+        mask = np.logical_and(face_score_mask, second_face_score_mask)
+        mask = np.logical_and(mask, unknown_dob_mask)
+        image_names_array = image_names_array[mask]
+        dob_array = dob_array[mask]
+        photo_date_array = photo_date_array[mask]
+        image_names = []
+        age_dates = []
+        for image_name_arg in range(image_names_array.shape[0]):
+            dob = date.fromordinal(dob_array[image_name_arg])
+            photo_date = date(year=photo_date_array[image_name_arg],
+                              month=7,
+                              day=1)
+            age = int((photo_date - dob).days // 365)
+            if not 0 <= age <= 100:
+                continue
+            image_name = image_names_array[image_name_arg][0]
+            image_names.append(image_name)
+            age_dates.append(age)
+        return dict(zip(image_names, age_dates))
+
 
     def _load_fer2013(self):
         data = pd.read_csv(self.dataset_path)
