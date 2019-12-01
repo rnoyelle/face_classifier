@@ -74,7 +74,7 @@ class DataManager(object):
         second_face_score = dataset['imdb']['second_face_score'][0, 0][0]
         face_score_mask = face_score > face_score_treshold
         second_face_score_mask = np.isnan(second_face_score)
-        unknown_dob_mask = np.logical_not(np.logical_or(np.isnan(dob_array), np.nan(photo_date_array)))
+        unknown_dob_mask = np.logical_not(np.logical_or(np.isnan(dob_array), np.isnan(photo_date_array)))
         mask = np.logical_and(face_score_mask, second_face_score_mask)
         mask = np.logical_and(mask, unknown_dob_mask)
         image_names_array = image_names_array[mask]
