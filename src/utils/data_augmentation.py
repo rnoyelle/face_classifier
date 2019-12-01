@@ -31,7 +31,8 @@ class ImageGenerator(object):
                  do_random_crop=False,
                  grayscale=False,
                  zoom_range=[0.75, 1.25],
-                 translation_factor=.3):
+                 translation_factor=.3,
+                 norm_input='v2'):
 
         self.ground_truth_data = ground_truth_data
         self.ground_truth_transformer = ground_truth_transformer
@@ -42,6 +43,7 @@ class ImageGenerator(object):
         self.image_size = image_size
         self.grayscale = grayscale
         self.color_jitter = []
+        self.norm_input = norm_input
         if saturation_var:
             self.saturation_var = saturation_var
             self.color_jitter.append(self.saturation)
@@ -168,7 +170,7 @@ class ImageGenerator(object):
         return image_array, box_corners
 
     def preprocess_images(self, image_array):
-        return preprocess_input(image_array)
+        return preprocess_input(image_array, norm=self.norm_input)
 
     def flow(self, mode='train'):
             while True:
