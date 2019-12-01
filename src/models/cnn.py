@@ -349,14 +349,22 @@ def big_XCEPTION(input_shape, num_classes):
 
 
 def classifier_VGG16(input_shape, num_classes):
+    # # # load the VGG conv layer
+    # model_vgg16_conv = VGG16(include_top=False, weights='imagenet')
 
-
-
-
-    # # load the VGG conv layer
+    # i = Input(shape=input_shape, name='input_1')
+    # x = model_vgg16_conv(i)
+    # x = Flatten()(x)
+    # x = Dense(4096, activation="relu")(x)
+    # x = Dropout(0.5)(x)
+    # x = Dense(4096, activation="relu")(x)
+    # x = Dropout(0.5)(x)
+    # o = Dense(num_classes, activation='softmax')(x)
+    # model = Model(input=i, output=o)
+        # # load the VGG conv layer
     model_vgg16_conv = VGG16(include_top=False, weights='imagenet')
 
-    x = Input(shape=input_shape,name = 'image_input')
+    x = Input(shape=input_shape, name='input_1')
     y = model_vgg16_conv(x)
     conv_layer = Model(input=x, output=y)
     # conv_layer.trainable = False
@@ -372,8 +380,8 @@ def classifier_VGG16(input_shape, num_classes):
     model.add(Dense(4096, activation="relu"))
     model.add(Dropout(0.5))
     model.add(Dense(num_classes, activation='softmax'))
-
     return model
+
 
 
 if __name__ == "__main__":
