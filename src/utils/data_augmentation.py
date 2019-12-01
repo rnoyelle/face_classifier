@@ -228,12 +228,12 @@ class ImageGenerator(object):
                         targets = to_categorical(targets, num_classes=self.num_classes)
                         if mode == 'train' or mode == 'val':
                             inputs = self.preprocess_images(inputs)
-                            yield self._wrap_in_dictionary(inputs, targets)
+                            yield inputs, targets #self._wrap_in_dictionary(inputs, targets)
                         if mode == 'demo':
-                            yield self._wrap_in_dictionary(inputs, targets)
+                            yield inputs, targets #self._wrap_in_dictionary(inputs, targets)
                         inputs = []
                         targets = []
 
     def _wrap_in_dictionary(self, image_array, targets):
-        return [{'input_1': image_array},
+        return [{'input_1': image_array}, # 'input_1'
                 {'predictions': targets}]
