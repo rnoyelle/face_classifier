@@ -33,7 +33,8 @@ class ImageGenerator(object):
                  zoom_range=[0.75, 1.25],
                  translation_factor=.3,
                  norm_input='v2',
-                 num_classes=2):
+                 num_classes=2,
+                 transform_to_onehot=True):
 
         self.ground_truth_data = ground_truth_data
         self.ground_truth_transformer = ground_truth_transformer
@@ -46,6 +47,7 @@ class ImageGenerator(object):
         self.color_jitter = []
         self.norm_input = norm_input
         self.num_classes = num_classes
+        self.transform_to_onehot = transform_to_onehot
         if saturation_var:
             self.saturation_var = saturation_var
             self.color_jitter.append(self.saturation)
@@ -225,7 +227,8 @@ class ImageGenerator(object):
                         inputs = np.asarray(inputs)
                         targets = np.asarray(targets)
                         # this will not work for boxes
-                        targets = to_categorical(targets, num_classes=self.num_classes)
+                        if self.transform_to_onehot :
+                            targets = to_categorical(targets, num_classes=self.num_classes)
                         if mode == 'train' or mode == 'val':
                             inputs = self.preprocess_images(inputs)
                             yield inputs, targets #self._wrap_in_dictionary(inputs, targets)
