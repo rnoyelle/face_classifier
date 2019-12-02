@@ -37,7 +37,7 @@ print('bouh')
 data_loader = DataManager(dataset_name, dataset_path=images_path + 'imdb.mat')
 ground_truth_data = data_loader.get_data()
 # subset_keys = sorted(ground_truth_data.keys())[:60]
-ground_truth_data =  {key : ground_truth_data[key] for key in subset_keys}
+# ground_truth_data =  {key : ground_truth_data[key] for key in subset_keys}
 train_keys, val_keys = split_imdb_data(ground_truth_data, validation_split)
 print('Number of training samples:', len(train_keys))
 print('Number of validation samples:', len(val_keys))
