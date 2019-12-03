@@ -397,7 +397,7 @@ def regressor_VGG16(input_shape, num_classes, pre_trained_model_path=None):
     else:
         model = load_model(pre_trained_model_path, compile=False)
         model.add(Dense(1, name='mean_age', trainable=False))
-        model.get_layer('mean_age').set_weights([np.arange(0, num_classes+1).reshape((num_classes+1, 1)),
+        model.get_layer('mean_age').set_weights([np.arange(0, num_classes).reshape((num_classes, 1)),
                                                 np.array([0])])
         model.get_layer('mean_age').trainable = False
         return model
