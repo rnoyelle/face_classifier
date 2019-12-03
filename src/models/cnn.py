@@ -12,6 +12,7 @@ from keras import layers
 from keras.regularizers import l2
 
 from keras.applications.vgg16 import VGG16
+from keras.models import load_model
 import numpy as np
 
 
@@ -367,8 +368,8 @@ def classifier_VGG16(input_shape, num_classes):
 
     x = Input(shape=input_shape, name='input_1')
     y = model_vgg16_conv(x)
-    conv_layer = Model(input=x, output=y)
-    conv_layer.name="conv_layer"
+    conv_layer = Model(inputs=x, outputs=y)
+    conv_layer.name = "conv_layer"
     # conv_layer.trainable = False
 
 
@@ -384,13 +385,23 @@ def classifier_VGG16(input_shape, num_classes):
     model.add(Dense(num_classes, activation='softmax'))
     return model
 
-def regressor_VGG16(input_shape, num_classes):
-    model = classifier_VGG16(input_shape, num_classes)
-    model.add(Dense(1, name='mean_age', trainable=False))
-    model.get_layer('mean_age').set_weights([np.arange(0, 101),
-                                            np.array([0])])
-    # model.get_layer('mean_age').trainable = False
-    return model
+def regressor_VGG16(input_shape, num_classes, pre_trained_model_path=None):
+    if pre_trained_model_path is None:
+
+        model = classifier_VGG16(input_shape, num_classes)
+        model.add(Dense(1, name='mean_age', trainable=False))
+        model.get_layer('mean_age').set_weights([np.arange(0, 101),
+                                                np.array([0])])
+        model.get_layer('mean_age').trainable = False # already False ?
+        return model
+    else:
+        model = load_model(pre_trained_model_path, compile=False)
+        model.add(Dense(1, name='mean_age', trainable=False))
+        model.get_layer('mean_age').set_weights([np.arange(0, 101),
+                                                np.array([0])])
+        model.get_layer('mean_age').trainable = False
+        return model
+
 
 if __name__ == "__main__":
     input_shape = (64, 64, 1)
