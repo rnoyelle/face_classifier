@@ -58,7 +58,7 @@ model.get_layer('conv_layer').trainable = False
 sgd = SGD(lr=1e-3, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(optimizer=sgd,
             loss='mse',
-            metrics=['mse'])
+            metrics=['mae'])
 model.summary()
 
 # model callbacks
@@ -66,7 +66,7 @@ early_stop = EarlyStopping('val_loss', patience=patience)
 reduce_lr = ReduceLROnPlateau('val_loss', factor=0.1,
                             patience=int(patience/2), verbose=1)
 csv_logger = CSVLogger(log_file_path, append=False)
-model_names = trained_models_path + '.{epoch:02d}-{val_mse:.2f}.hdf5'
+model_names = trained_models_path + '.{epoch:02d}-mae-{val_mae:.2f}.hdf5'
 model_checkpoint = ModelCheckpoint(model_names,
                                 monitor='val_loss',
                                 verbose=1,
