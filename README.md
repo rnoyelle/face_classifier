@@ -23,13 +23,6 @@ e.g.
 
 > python3 image_emotion_gender_demo.py ../images/test_image.jpg
 
-### Running with Docker
-
-With a few steps one can get its own face classification and detection running. Follow the commands below:
-
-* ```docker pull ekholabs/face-classifier```
-* ```docker run -d -p 8084:8084 --name=face-classifier ekholabs/face-classifier```
-* ```curl -v -F image=@[path_to_image]  http://localhost:8084/classifyImage > image.png```
 
 ### To train previous/new models for emotion classification:
 
