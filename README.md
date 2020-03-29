@@ -61,7 +61,10 @@ e.g.
 # Face modification
 ## With autoencoder 
 
+### To train :
 * Follow instruction in AutoencoderV2.ipynb to train the encoder
 
+### To use the autoencoder :
 * To try it on pictures put them in the input directory then run the main_ae.py file
 > python3 main_ae.py
+* Your pictures processed will be in the ./output folder
