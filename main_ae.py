@@ -42,8 +42,8 @@ import model
 
 INPUT_DIM = (64,64,3) # Image dimension
 Z_DIM = 512 # Dimension of the latent vector (z)
-WEIGHTS_FOLDER = './weights/'
-MEAN_VECTOR_FOLDER = './data/'
+WEIGHTS_FOLDER = './ae_weights/'
+MEAN_VECTOR_FOLDER = './mean_vector_folder/'
 input_path = "./input/"
 
 encoder_input, encoder_output,  shape_before_flattening, encoder  = model.build_encoder(input_dim = INPUT_DIM,
