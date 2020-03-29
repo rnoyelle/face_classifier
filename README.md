@@ -58,3 +58,10 @@ e.g.
 > python3 train_age_regressor.py
 
 
+# Face modification
+## With autoencoder 
+
+* Follow instruction in AutoencoderV2.ipynb to train the encoder
+
+* To try it on pictures put them in the input directory then run the main_ae.py file
+> python3 main_ae.py
