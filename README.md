@@ -2,31 +2,19 @@
 Real-time face detection and emotion/gender classification using fer2013/IMDB datasets with a keras CNN model and openCV.
 * IMDB gender classification test accuracy: 96%.
 * fer2013 emotion classification test accuracy: 66%.
+* IMDB age regression test mae : 9.73y.
 
-For more information please consult the [publication](https://github.com/oarriaga/face_classification/blob/master/report.pdf)
+For more information please consult the [publication](https://github.com/oarriaga/face_classification/blob/master/report.pdf) and https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/
 
 # Emotion/gender examples:
 
 ![alt tag](images/demo_results.png)
-
-Guided back-prop
-![alt tag](images/gradcam_results.png)
-
-Real-time demo:
-<div align='center'>
-  <img src='images/color_demo.gif' width='400px'>
-</div>
-
-[B-IT-BOTS](https://mas-group.inf.h-brs.de/?page_id=622) robotics team :)
-![alt tag](images/robocup_team.png)
 
 ## Instructions
 
 ### Run real-time emotion demo:
 > python3 video_emotion_color_demo.py
 
-### Run real-time guided back-prop demo:
-> python3 image_gradcam_demo.py
 
 ### Make inference on single images:
 > python3 image_emotion_gender_demo.py <image_path>
@@ -67,4 +55,7 @@ With a few steps one can get its own face classification and detection running. 
 
 * Run the train_gender_classification.py file
 > python3 train_gender_classifier.py
+
+
+### To train previous/new models for age regression:
 
