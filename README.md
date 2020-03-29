@@ -2,7 +2,7 @@
 Real-time face detection and emotion/gender classification using fer2013/IMDB datasets with a keras CNN model and openCV.
 * IMDB gender classification test accuracy: 96%.
 * fer2013 emotion classification test accuracy: 66%.
-* IMDB age regression test mae : 9.73y.
+* IMDB age regression test mae : 9.73 years.
 
 For more information please consult the [publication](https://github.com/oarriaga/face_classification/blob/master/report.pdf) and https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/
 
@@ -41,7 +41,7 @@ With a few steps one can get its own face classification and detection running. 
 * Untar the file:
 > tar -xzf fer2013.tar
 
-* Run the train_emotion_classification.py file
+* Run the train_emotion_classification.py file or the jupyter notebook train_emotion_model.ipynb
 > python3 train_emotion_classifier.py
 
 ### To train previous/new models for gender classification:
@@ -58,4 +58,10 @@ With a few steps one can get its own face classification and detection running. 
 
 
 ### To train previous/new models for age regression:
+
+* Run the train_age_classifier.py file
+> python3 train_age_classifier.py
+* Then run the train_age_regressor.py file
+> python3 train_age_regressor.py
+
 
