@@ -59,6 +59,11 @@ e.g.
 
 
 # Face modification
+## With C-GAN 
+
+* Run the train_cGAN.py file
+> python3 train_cGan.py
+
 ## With autoencoder 
 
 ### To train :
