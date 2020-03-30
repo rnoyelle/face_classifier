@@ -13,14 +13,12 @@ For more information please consult the [publication](https://github.com/oarriag
 
 *It will predict on the images provided and change the classes using autoencoder / "deblur" the result.
 
-# Emotion/gender examples:
+# Emotion/gender/age examples:
 
-![alt tag](images/demo_results.png)
+![alt tag](images/predicted_test_image.png)
 
 ## Instructions
 
-### Run real-time emotion demo:
-> python3 video_emotion_color_demo.py
 
 
 ### Make inference on single images:
@@ -28,7 +26,7 @@ For more information please consult the [publication](https://github.com/oarriag
 
 e.g.
 
-> python3 image_emotion_gender_demo.py ../images/test_image.jpg
+> python3 image_emotion_gender_demo.py ../images/friends_image4.jpg
 
 
 ### To train previous/new models for emotion classification:
