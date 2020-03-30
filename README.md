@@ -22,11 +22,11 @@ For more information please consult the [publication](https://github.com/oarriag
 
 
 ### Make inference on single images:
-> python3 image_emotion_gender_demo.py <image_path>
+> python3 image_emotion_gender_age_demo.py <image_path>
 
 e.g.
 
-> python3 image_emotion_gender_demo.py ../images/friends_image4.jpg
+> python3 image_emotion_gender_age_demo.py ../images/friends_image4.jpg
 
 
 ### To train previous/new models for emotion classification:
