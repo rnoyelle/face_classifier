@@ -11,9 +11,9 @@ def deblur(weight_path, input_dir, output_dir):
     g = generator_model()
     g.load_weights(weight_path)
     for image_name in os.listdir(input_dir):
-        image = np.array([preprocess_image(load_image(os.path.join(input_dir, image_name)))])
+        image = np.array([preprocess_image(load_image(input_dir+'/'+image_name))])
         x_test = image
-        x_test= x_test[:, :, :,:3]
+        #x_test= x_test[:, :, :,:3]
         generated_images = g.predict(x=x_test)
         generated = np.array([deprocess_image(img) for img in generated_images])
         x_test = deprocess_image(x_test)
