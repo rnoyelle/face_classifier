@@ -6,13 +6,12 @@ Real-time face detection and emotion/gender classification using fer2013/IMDB da
 
 For more information please consult the [publication](https://github.com/oarriaga/face_classification/blob/master/report.pdf) and https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/
 
-# Cropping faces from group image :
+# Demo :
 
-* put the group image inside "input" folder
-* use the following command :
-> python3 face_crop.py
+*Just put an image of a group into the "input" folder and run the main.py file :
+> python3 main.py
 
-* the cropped picture will appear in output/cropped
+*It will predict on the images provided and change the classes using autoencoder / "deblur" the result.
 
 # Emotion/gender examples:
 
